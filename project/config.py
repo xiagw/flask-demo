@@ -13,7 +13,7 @@ class BaseConfig:
 class DevelopmentConfig(BaseConfig):
     """开发环境配置"""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_DEV_URL')
 
 
 class TestingConfig(BaseConfig):
