@@ -10,3 +10,17 @@ class TestUserService(BaseTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('pong', data['message'])
         self.assertIn('success', data['status'])
+
+    def test_add_user(self):
+        """确保能够正确添加一个用户的用户到数据库中"""
+        with self.client:
+            response = self.client.post(
+                '/users',
+                data=json.dumps(
+                    dict(username='cnych', email='abcd@gmail.com')),
+                content_type='application/json',
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 201)
+            self.assertIn('abcd@gmail.com was added', data['message'])
+            self.assertEqual('success', data['status'])
