@@ -51,3 +51,17 @@ def add_user():
             'message': 'Invalid payload.'
         }
         return jsonify(response_data), 400
+
+
+def get_user(user_id):
+    """获取某用户的详细信息"""
+    user = User.query.filter_by(id=user_id).first()
+    response_object = {
+        'status': 'success',
+        'data': {
+            'username': user.username,
+            'email': user.email,
+            'created_at': user.created_at
+        }
+    }
+    return jsonify(response_object), 200
